@@ -7,20 +7,18 @@ public class PlayerControl : MonoBehaviour
 {
     int life = 3;
 
-    public Text TextLife;
+    public GameObject prefab;
+    public GameObject spawnPoint;
+    public float velocity = 100f;
+    //public Text TextLife;
+
     Rigidbody2D rb;
-    Animator anim;
-
-    private Animator dogAnimator;
-
     void Start () {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        dogAnimator = GetComponent<Animator>();
-        TextLife.text = life.ToString();
+        //TextLife.text = life.ToString();
     }
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("Bone")) {
+        if (other.gameObject.CompareTag("Coin")) {
             SFXManager.instance.ShowBoneParticles(other.gameObject);
             AudioManager.instance.PlaySoundbonePickup(other.gameObject);
             Destroy(other.gameObject);
@@ -35,11 +33,11 @@ public class PlayerControl : MonoBehaviour
         else if (other.gameObject.CompareTag("Life")) {
             if (life < 3) {
                 life++;
-                TextLife.text = life.ToString();
+                //TextLife.text = life.ToString();
                 AudioManager.instance.PlaySoundlifePickup(other.gameObject);
                 Destroy(other.gameObject);
             }
-        }
+        } 
         else if (other.gameObject.layer == LayerMask.NameToLayer("Enemies")) {
             HurtPlayer();
         }
@@ -55,13 +53,13 @@ public class PlayerControl : MonoBehaviour
 
     void HurtPlayer() {
         life--;
-        TextLife.text = life.ToString();
+        //TextLife.text = life.ToString();
         AudioManager.instance.PlaySoundlifeLost(gameObject);
         if (life == 0){
             KillPlayer();
         }
     }
-
+    
     void KillPlayer() {
         Destroy(gameObject);
         StopMusicAndTape();
