@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 247848952413436101}
   - component: {fileID: 247848952413436102}
   - component: {fileID: 247848952413436103}
-  - component: {fileID: 247848952413436099}
   - component: {fileID: 247848952413436098}
   - component: {fileID: 247848952413436097}
   m_Layer: 8
@@ -122,20 +121,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.1013849, y: 0.24440202}
   m_Size: {x: 1.6387044, y: 2.5774987}
   m_Direction: 0
---- !u!114 &247848952413436099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247848952413436104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fda874e4c592f6842a1a0f52a1c1fb5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpeedFactor: 50
-  force: 40
 --- !u!114 &247848952413436098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a146e14fa0238b47854cbf6aab6d0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextLife: {fileID: 0}
+  prefab: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  velocity: 100
 --- !u!95 &247848952413436097
 Animator:
   serializedVersion: 3

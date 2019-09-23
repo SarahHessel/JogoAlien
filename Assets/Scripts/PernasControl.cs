@@ -17,7 +17,6 @@ public class PernasControl : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Platforms") || other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
         {
              script.noChao = true;
-
         }
     }
 
@@ -25,8 +24,7 @@ public class PernasControl : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Platforms") || other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
         {
-          script.noChao = false;
-
+            script.noChao = false;
         }
     }
 }
