@@ -7,8 +7,6 @@ public class PlayerControl : MonoBehaviour
 {
     bool wait = false;
 
-    public GameObject prefab;
-    public GameObject spawnPoint;
     public float velocity = 100f;
     //public Text TextLife;
 
