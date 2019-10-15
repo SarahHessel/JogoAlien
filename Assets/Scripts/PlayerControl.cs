@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
-    int life = 3;
+    bool wait = false;
 
     public GameObject prefab;
     public GameObject spawnPoint;
@@ -30,16 +30,8 @@ public class PlayerControl : MonoBehaviour
             Destroy(gameObject);
             LevelManager.instance.ShowLevelCompletePanel();
         }
-        else if (other.gameObject.CompareTag("Life")) {
-            if (life < 3) {
-                life++;
-                //TextLife.text = life.ToString();
-                AudioManager.instance.PlaySoundlifePickup(other.gameObject);
-                Destroy(other.gameObject);
-            }
-        } 
         else if (other.gameObject.layer == LayerMask.NameToLayer("Enemies")) {
-            KillPlayer();
+            HurtPlayer();
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Forbidden")) {
             KillPlayer();
@@ -51,19 +43,39 @@ public class PlayerControl : MonoBehaviour
         LevelManager.instance.SetTapeSpeed(0);  
     }
 
-    void HurtPlayer() {
-        life--;
-        //TextLife.text = life.ToString();
-        AudioManager.instance.PlaySoundlifeLost(gameObject);
-        if (life == 0){
-            KillPlayer();
-        }
-    }
-    
     void KillPlayer() {
         Destroy(gameObject);
         StopMusicAndTape();
         AudioManager.instance.PlaySoundFail(gameObject);
         LevelManager.instance.ShowGameOverPanel();
     }
+
+
+    void HurtPlayer() {
+        if (!wait) {
+            LevelManager.instance.DecrementLifeCount();
+            ChangeAlpha(0.5f);
+            if (LevelManager.instance.GetLifeCount() == 0) {
+                KillPlayer();
+            }
+            else {         
+                //AudioManager.instance.PlaySoundHurt(gameObject); // OPCIONAL: TOCAR UM SOM DE MACHUCADO       
+                wait = true;
+                StartCoroutine(DisableWait(2.0f));
+            }
+        }
+    }
+
+    private IEnumerator DisableWait(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ChangeAlpha(1f);        
+        wait = false;
+    }
+
+    private void ChangeAlpha(float alpha) {
+        Color tmp = GetComponent<SpriteRenderer>().color;
+        tmp.a = alpha;
+        GetComponent<SpriteRenderer>().color = tmp;
+    }    
 }

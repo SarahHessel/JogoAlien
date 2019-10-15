@@ -35,8 +35,17 @@ public class LevelManager : MonoBehaviour
         sceneData.boneCount++;
     }
 
+    public void DecrementLifeCount() {
+        sceneData.lifeCount--;
+    }
+
+    public int GetLifeCount() {
+        return sceneData.lifeCount;
+    }
+
     void DisplayHudData() {
         uiComponents.hud.txtBoneCount.text = "x " + sceneData.boneCount;
+        uiComponents.hud.txtLifeCount.text = "x " + sceneData.lifeCount;
     }
 
     public void SetTapeSpeed(float value) {

@@ -6,5 +6,6 @@ using System;
 public class SceneData
 {
   public int boneCount = 0;
+  public int lifeCount = 3;
     
 }
